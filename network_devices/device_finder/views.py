@@ -1,6 +1,6 @@
+from django.shortcuts import render
 import nmap
 import subprocess
-from django.shortcuts import render
 
 def scan_devices(request):
     devices = []
@@ -30,7 +30,6 @@ def scan_devices(request):
             try:
                 # Run the provided nmap command using subprocess
                 command = f"nmap {nmap_command}"
-                command2 = command.split()
                 result = subprocess.run(command, shell=True, capture_output=True, text=True)
                 nmap_output = result.stdout  # Capture the standard output from the command
 
@@ -41,3 +40,12 @@ def scan_devices(request):
                 nmap_output = f"Error running the command: {str(e)}"
 
     return render(request, 'device_finder/index.html', {'devices': devices, 'nmap_output': nmap_output})
+
+def next_page(request):
+    # This view renders the next page message
+    return render(request, 'device_finder/next_page.html')
+
+
+def attacks_page(request):
+    # This view renders the next page message
+    return render(request, 'device_finder/attacks.html')

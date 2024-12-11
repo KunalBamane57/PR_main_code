@@ -3,45 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Device Finder and Nmap Runner</title>
+    <title>SIP Server and Client Server Ports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        .title {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .label-circle {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .sidebar-btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .content-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .content-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        a button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        a button:hover {
+            background-color: #e0a800;
+        }
+    </style>
 </head>
 <body>
-    <h1>Network Device Finder and Nmap Command Runner</h1>
-
-    <!-- Form to scan for connected devices -->
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <label for="ip_address">Enter IP Address (for scanning):</label>
-            <input type="text" id="ip_address" name="ip_address" placeholder="Enter IP Address">
+    <h1 class="title">SIP Server and Client Server Ports</h1>
+    <div class="container">
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <div class="label-circle">Sip Server</div>
+                <input type="text" class="input-box" placeholder="Enter the IP">
+            </div>
+            <div class="input-group">
+                <div class="label-circle">Client Server</div>
+                <input type="text" class="input-box" placeholder="Enter the IP">
+            </div>
         </div>
 
-        <button type="submit">Scan Devices</button>
-    </form>
-
-    {% if devices %}
-        <h2>Connected Devices:</h2>
-        <ul>
-            {% for device in devices %}
-                <li>{{ device }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <!-- Form to enter custom Nmap command -->
-    <form method="POST">
-        {% csrf_token %}
-        <div>
-            <label for="nmap_command">Enter Nmap Command:</label>
-            <input type="text" id="nmap_command" name="nmap_command" placeholder="e.g., -sn 192.168.1.0/24">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <button class="sidebar-btn">Log Files</button>
+            <button class="sidebar-btn">Services</button>
+            <button class="sidebar-btn">Channel</button>
+            <button class="sidebar-btn">Models</button>
         </div>
 
-        <button type="submit">Run Nmap Command</button>
-    </form>
+        <!-- Main Content Section -->
+        <div class="content">
+            <button class="content-btn">SIP</button>
+            <button class="content-btn">Application</button>
+            <button class="content-btn">Log Files</button>
+        </div>
 
-    {% if nmap_output %}
-        <h2>Nmap Command Output:</h2>
-        <pre>{{ nmap_output }}</pre>
-    {% endif %}
+        <!-- Navigation Button -->
+        <a href="{% url 'attacks_page' %}">
+            <button type="button">attacks_page</button>
+        </a>
+    </div>
 </body>
 </html>

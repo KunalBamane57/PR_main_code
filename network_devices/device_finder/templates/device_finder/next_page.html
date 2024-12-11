@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Page</title>
+</head>
+<body>
+    <h1>Network Device Finder and Nmap Command Runner</h1>
+
+    <!-- Form to scan for connected devices -->
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="ip_address">Enter IP Address (for scanning):</label>
+            <input type="text" id="ip_address" name="ip_address" placeholder="Enter IP Address">
+        </div>
+
+        <button type="submit">Scan Devices</button>
+    </form>
+
+    {% if devices %}
+        <h2>Connected Devices:</h2>
+        <ul>
+            {% for device in devices %}
+                <li>{{ device }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Form to enter custom Nmap command -->
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="nmap_command">Enter Nmap Command:</label>
+            <input type="text" id="nmap_command" name="nmap_command" placeholder="e.g., -sn 192.168.1.0/24">
+        </div>
+
+        <button type="submit">Run Nmap Command</button>
+        <!-- Link to the next page -->
+        <a href="{% url 'next_page' %}">
+            <button type="button">Next page</button>
+        </a>
+    </form>
+
+    {% if nmap_output %}
+        <h2>Nmap Command Output:</h2>
+        <pre>{{ nmap_output }}</pre>
+    {% endif %}
+</body>
+</html>
