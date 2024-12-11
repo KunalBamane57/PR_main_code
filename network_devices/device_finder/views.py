@@ -49,3 +49,20 @@ def next_page(request):
 def attacks_page(request):
     # This view renders the next page message
     return render(request, 'device_finder/attacks.html')
+
+# Simulate different attacks with views
+def attack1(request):
+    # Here you can simulate Attack 1, for example logging or some other action
+    return render(request, 'attacks/index.html', {'message': 'Attack 1 Triggered!'})
+
+def attack2(request):
+    # Simulate Attack 2
+    return render(request, 'attacks/index.html', {'message': 'Attack 2 Triggered!'})
+
+def attack3(request):
+    # Simulate Attack 3
+    return render(request, 'attacks/index.html', {'message': 'Attack 3 Triggered!'})
+
+def attack4(request):
+    # Simulate Attack 4
+    return render(request, 'attacks/index.html', {'message': 'Attack 4 Triggered!'})
