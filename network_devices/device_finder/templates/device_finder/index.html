@@ -6,50 +6,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIP Server and Client Server Ports</title>
     <style>
-        .heading{
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: auto;
+            background-color: #f4f4f4;
         }
-        .heading h1{
-            color: rgb(25, 130, 250);
+
+        .title {
+            margin: 20px 0;
+            /* font-size: 24px; */
+            color: rgb(31, 135, 255);
         }
-        .ip_addresses{
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 40%;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .label-circle {
+            background-color: #76b5f9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .sidebar-btn {
+            padding: 10px 20px;
+            /* background-color: #6cb3ff; */
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar-btn:hover {
+            background-color: #e2f0ff;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        a button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #ffc107;
+            border: none;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        a button:hover {
+            background-color: #e0a800;
+        }
+
+        .minicon {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            align-items: center;
         }
-        .ip{
+
+        .Sip-Client {
+            height: 100px;
+            width: 100px;
+            border-radius: 100px;
+            background: #76b5f9;
+            color: white;
             display: flex;
-            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .sip {
+            width: 40%;
+            height: 300px;
+            margin-top: 100px;
+        }
+
+        .innercon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
         }
     </style>
 </head>
 
 <body>
-    <div class="main_container">
-        <div class="heading">
-            <h1 class="title">SIP Server and Client Server Ports</h1>
-        </div>
-        <div class="ip_addresses">
-            <div class="tag"><h3>Sip Server</h3></div>
-            <div class="ip">
-                <div class="server-name">
-                    <h4>Sip Server</h4>
-                    <input type="Enter Ip address">
+    <h1 class="title">SIP Server and Client Server Ports</h1>
+    <div class="container">
+        <!-- Input Section -->
+        <div class="minicon">
+            <div class="Sip-Client">
+                Sip Server
+            </div>
+            <div class="input-section">
+                <div class="input-group">
+                    <div class="label-circle">Sip Server</div>
+                    <input type="text" class="input-box" placeholder="Enter the IP">
                 </div>
-                <div class="server-name"></div>
-                    <h4>client Server</h4>
-                    <input type="Enter Ip address">
+                <div class="input-group">
+                    <div class="label-circle">Client Server</div>
+                    <input type="text" class="input-box" placeholder="Enter the IP">
                 </div>
             </div>
-            <div class="tag"><h3>Client Server</h3></div>
+            <div class="Sip-Client">
+                Client Server
+            </div>
         </div>
-        <a href="{% url 'attacks_page' %}">
-            <button type="button">attacks_page</button>
-        </a>
+
+        <!-- Sidebar Section -->
+        <div class="innercon">
+            <div class="sip">
+                <div class="sidebar">
+                    <button class="sidebar-btn">Log Files</button>
+                    <button class="sidebar-btn">Services</button>
+                    <button class="sidebar-btn">Channel</button>
+                    <button class="sidebar-btn">Models</button>
+                </div>
+            </div>
+            <div class="sip">
+                <div class="sidebar">
+                    <button class="sidebar-btn">Log Files</button>
+                    <button class="sidebar-btn">Services</button>
+                    <button class="sidebar-btn">Channel</button>
+                    <button class="sidebar-btn">Models</button>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Button -->
+        <div class="btn">
+            <a href="{% url 'attacks_page' %}">
+                <button type="button">attacks_page</button>
+            </a>
+        </div>
     </div>
 </body>
 
