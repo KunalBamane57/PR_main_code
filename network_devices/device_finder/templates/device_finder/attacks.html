@@ -38,7 +38,7 @@
             font-size: 20px;
             color: #d9534f;
         }
-        .nextbtn{
+        .nextbtn {
             color: white;
             background-color: red;
             border: none;
@@ -53,20 +53,26 @@
     <p>Select an attack to simulate:</p>
     <div class="button-container">
         <form method="POST" action="{% url 'attack1' %}">
-            {Dos Attack}
+            {% csrf_token %}
             <button class="attack-button" type="submit">Simulate Attack 1</button>
         </form>
         <form method="POST" action="{% url 'attack2' %}">
-            {Flood Attack}
+            {% csrf_token %}
             <button class="attack-button" type="submit">Simulate Attack 2</button>
         </form>
         <form method="POST" action="{% url 'attack3' %}">
-            {Ddos Attack}
+            {% csrf_token %}
             <button class="attack-button" type="submit">Simulate Attack 3</button>
         </form>
         <form method="POST" action="{% url 'attack4' %}">
-            {xyz Attack}
+            {% csrf_token %}
             <button class="attack-button" type="submit">Simulate Attack 4</button>
+        </form>
+        <form method="POST" action="{% url 'inviteflood_attack' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="server_ip" placeholder="Server IP" required>
+            <button class="attack-button" type="submit">Simulate Inviteflood Attack</button>
         </form>
         <form>
             <a href="{% url 'next_page' %}">
