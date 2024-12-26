@@ -61,11 +61,12 @@ def attack3(request):
 def attack4(request):
     return render(request, 'attacks/index.html', {'message': 'Attack 4 Triggered!'})
 
+
 def inviteflood_attack(request):
     if request.method == "POST":
         username = request.POST.get('username')
         server_ip = request.POST.get('server_ip')
-        interface = 'eth0'
+        interface = request.POST.get('interface')
         num_packets = '10000000'
 
         try:
@@ -82,6 +83,7 @@ def inviteflood_attack(request):
         return render(request, 'attacks/index.html', {'message': message})
 
     return render(request, 'attacks/index.html', {'message': 'Invalid request method.'})
+
 
 def dos_attack(request):
     if request.method == "POST":
@@ -106,3 +108,28 @@ def dos_attack(request):
 
     return render(request, 'attacks/index.html', {'message': 'Invalid request method.'})
 
+def sipvicious(request):
+    return render(request, 'device_finder/sipvicious.html')
+
+def inviteflood(request):
+    return render(request, 'device_finder/inviteflood.html')
+
+
+
+def execute_command(request):
+    if request.method == 'POST':
+        try:
+            data = request.body.decode('utf-8')
+            command = json.loads(data).get('command')
+
+            result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+            if result.returncode != 0:
+                return JsonResponse({'message': f'Command failed: {result.stderr}'})
+
+            return JsonResponse({'message': f'Command executed successfully.\nOutput: {result.stdout}'})
+
+        except Exception as e:
+            return JsonResponse({'message': f'An error occurred: {str(e)}'})
+
+    return JsonResponse({'message': 'Invalid request method.'})

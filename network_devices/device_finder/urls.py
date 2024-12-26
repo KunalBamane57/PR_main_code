@@ -10,4 +10,8 @@ urlpatterns = [
     path('attack3/', views.attack3, name='attack3'),
     path('attack4/', views.attack4, name='attack4'),
     path('inviteflood_attack/', views.inviteflood_attack, name='inviteflood_attack'),
+    path('sipvicious/', views.sipvicious, name='sipvicious'),
+    path('inviteflood/', views.inviteflood, name='inviteflood'),
+    path('dos_attack/', views.dos_attack, name='dos_attack'),
+
 ]

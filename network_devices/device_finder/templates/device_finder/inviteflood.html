@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>invite flood Page</h1>
+    <form method="POST" action="{% url 'inviteflood_attack' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="text" name="server_ip" placeholder="Server IP" required>
+        <input type="text" name="interface" placeholder="Network Interface (e.g., eth0)" required>
+        <button class="attack-button" type="submit">Simulate Inviteflood Attack</button>
+    </form>
+    <form method="POST" action="{% url 'dos_attack' %}">
+        {% csrf_token %}
+        <label for="target_ip">Target IP:</label>
+        <input type="text" id="target_ip" name="target_ip" required>
+        <br>
+        <label for="target_port">Target Port:</label>
+        <input type="text" id="target_port" name="target_port" required>
+        <br>
+        <label for="packet_count">Packet Count:</label>
+        <input type="text" id="packet_count" name="packet_count" value="1000">
+        <br>
+        <button type="submit">Start DoS Attack</button>
+    </form>
+</body>
+
+</html>

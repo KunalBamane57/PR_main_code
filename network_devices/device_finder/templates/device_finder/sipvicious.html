@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoS Attack Page</title>
+    <style>
+        /* ... (CSS styles as before) */
+    </style>
+</head>
+<body>
+    <h1>sipvicious_svwar Page</h1>
+
+    <form id="attackForm">
+        <label for="ip">IP Address:</label><br>
+        <input type="text" id="ip" name="ip" required><br><br>
+        <label for="portRange">Port Range:</label><br>
+        <input type="text" id="portRange" name="portRange" placeholder="e.g., 1001-1005" required><br><br>
+        <button type="button" onclick="startAttack()">Start Attack</button>
+    </form>
+
+    <script>
+        function startAttack() {
+            var ip = document.getElementById("ip").value;
+            var portRange = document.getElementById("portRange").value;
+            var command = "sipvicious_svwar -e" + portRange + " " + ip + "-m INVITE";
+
+            fetch('/execute_command/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during the attack.');
+            });
+        }
+    </script>
+</body>
+</html>

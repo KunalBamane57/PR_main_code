@@ -38,14 +38,14 @@
             font-size: 20px;
             color: #d9534f;
         }
-        .nextbtn {
+        /* .nextbtn {
             color: white;
             background-color: red;
             border: none;
             padding: 10px 20px;
             margin-top: 5px;
             border-radius: 5px;
-        }
+        } */
     </style>
 </head>
 <body>
@@ -68,30 +68,22 @@
             {% csrf_token %}
             <button class="attack-button" type="submit">Simulate Attack 4</button>
         </form>
-        <form method="POST" action="{% url 'inviteflood_attack' %}">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="server_ip" placeholder="Server IP" required>
-            <button class="attack-button" type="submit">Simulate Inviteflood Attack</button>
+
+        <form method="GET" action="{% url 'inviteflood' %}">
+            <button type="submit" class="attack-button">Inviteflood</button>
         </form>
-        <form method="POST" action="{% url 'dos_attack' %}">
-            {% csrf_token %}
-            <label for="target_ip">Target IP:</label>
-            <input type="text" id="target_ip" name="target_ip" required>
-            <br>
-            <label for="target_port">Target Port:</label>
-            <input type="text" id="target_port" name="target_port" required>
-            <br>
-            <label for="packet_count">Packet Count:</label>
-            <input type="text" id="packet_count" name="packet_count" value="1000">
-            <br>
-            <button type="submit">Start DoS Attack</button>
+
+        <form method="GET" action="{% url 'sipvicious' %}">
+            <button type="submit" class="attack-button">sipvicious_svwar</button>
         </form>
+        
         <form>
             <a href="{% url 'next_page' %}">
-                <button type="button" class="nextbtn">Next page</button>
+                <button type="button" class="nextbtn attack-button">NMap Commands</button>
             </a>
         </form>
+    
+        
     </div>
     {% if message %}
         <div class="message">{{ message }}</div>

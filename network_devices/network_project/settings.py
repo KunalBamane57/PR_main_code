@@ -55,8 +55,8 @@ ROOT_URLCONF = 'network_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [BASE_DIR / 'templates'],  # Add your global template directory here
+        'APP_DIRS': True,  # This allows Django to look for templates in app directories
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -67,6 +67,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'network_project.wsgi.application'
 
